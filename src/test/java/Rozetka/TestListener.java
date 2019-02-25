@@ -12,7 +12,7 @@ public class TestListener implements ITestNGListener {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
     @Attachment(value = "{0}", type = "text/plain")
-    public statis String saveTextLog (String message)  {
+    public static String saveTextLog (String message)  {
         return message;
     }
 

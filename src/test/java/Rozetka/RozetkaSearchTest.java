@@ -84,6 +84,8 @@ public class RozetkaSearchTest {
         FileUtils.copyFile(scrFile1, new File("/Users/kristinahazukina/Documents/Screenshot/screenshot1.jpg"));
         WebElement feedbacks = driver.findElement(By.xpath("//*[@id=\"tabs\"]/li[4]"));
         feedbacks.click();
+        //пока поставила плохое ожидание, позже переделаю
+        Thread.sleep(5000);
         WebElement lastFeedback = driver.findElement(By.xpath("//*[@id=\"comments\"]/article[1]/div/div[1]/div[3]"));
         lastFeedback.getText();
         //прикрутить репорт с последним комментарием и скриншотом
