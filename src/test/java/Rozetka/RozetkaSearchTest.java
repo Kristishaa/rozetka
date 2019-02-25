@@ -49,7 +49,7 @@ public class RozetkaSearchTest {
         searchLink3.click();
         //проверяю, что чекбокс асус чекнутый
         boolean checkAsus = driver.findElement(By.cssSelector("#filter_producer_4 > label > a")).isSelected();
-        //проверить, что все ноутбуки асус
+        //проверить, что все ноутбуки асус - тут надо проверять блок ноутов на каждой странице и переклацывать каждую страницу и всё по новой?
         //Выбрать в фильтре цена  значение до 10000 грн
         WebElement searchPrice = driver.findElement(By.cssSelector("#price\\5b max\\5d"));
         searchPrice.sendKeys("10000");
