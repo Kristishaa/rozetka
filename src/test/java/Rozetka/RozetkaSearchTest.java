@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -29,10 +30,7 @@ public class RozetkaSearchTest {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver2");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-       //driver = initChromeDriver();
-        //e_driver = new EventFiringWebDriver(driver);
-        //eventListener = new WebEventListener();
-        //e_driver.register(eventListener);
+
 
     }
 
@@ -87,7 +85,8 @@ public class RozetkaSearchTest {
 
         }
         else{
-            Assert.fail("price has changed");
+            //System.out.print("Price has changed");
+            Reporter.log( "Price has changed", true );
         }
 
         //открыть характеристики ноутбука
