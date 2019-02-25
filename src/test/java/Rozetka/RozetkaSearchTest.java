@@ -4,6 +4,8 @@ import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,6 +15,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Listeners({TestListener.class})
 
@@ -54,6 +57,7 @@ public class RozetkaSearchTest {
         searchPrice.sendKeys("10000");
         WebElement button = driver.findElement(By.cssSelector("#submitprice"));
         button.click();
+        Thread.sleep(5000);
         // тут проверить, что список обновлён и цена в ходит в диапазон
         //выбрать ноут и проверить цены
         List<WebElement> elements = driver.findElements(By.xpath("//*[@data-view_type='catalog_with_hover']"));
@@ -76,6 +80,16 @@ public class RozetkaSearchTest {
         }
         WebElement notebook = driver.findElement(By.linkText("Ноутбук Asus VivoBook RZ540MA-GQ008 (90RZ0IR1-M00080) Chocolate Black"));
         notebook.click();
+        WebElement price = driver.findElement(By.xpath("//*[@id=\"price_label\"]"));
+        int priceal = Integer.parseInt(price.getText().replaceAll("\\s+","").replaceAll("\\D+", ""));
+        //Assert.assertEquals(priceal, 6999);
+        if(priceal == 6999){
+
+        }
+        else{
+            Assert.fail("price has changed");
+        }
+
         //открыть характеристики ноутбука
         WebElement characteristic = driver.findElement(By.xpath("//*[@id=\"tabs\"]/li[2]"));
         characteristic.click();
@@ -84,8 +98,10 @@ public class RozetkaSearchTest {
         FileUtils.copyFile(scrFile1, new File("/Users/kristinahazukina/Documents/Screenshot/screenshot1.jpg"));
         WebElement feedbacks = driver.findElement(By.xpath("//*[@id=\"tabs\"]/li[4]"));
         feedbacks.click();
-        //пока поставила плохое ожидание, позже переделаю
-        Thread.sleep(5000);
+        //пока поставила ожидание, позже переделаю
+        //Thread.sleep(10000);
+        WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"comments\"]/article[1]/div/div[1]/div[3]")));
         WebElement lastFeedback = driver.findElement(By.xpath("//*[@id=\"comments\"]/article[1]/div/div[1]/div[3]"));
         lastFeedback.getText();
         //прикрутить репорт с последним комментарием и скриншотом
